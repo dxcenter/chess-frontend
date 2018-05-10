@@ -3,7 +3,7 @@
 	position: fixed;
 	right: 90px;
 	bottom: 20px;
-	animation: Page-logo-spin infinite 30s linear;
+	/*animation: Page-logo-spin infinite 30s linear;*/
 	opacity: 0.2;
 }
 

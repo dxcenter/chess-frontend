@@ -27,11 +27,12 @@ function getPieces(gameStatus) {
 		var pieceId = piecesRaw[squareId];
 		var pieceLetter = pieceIdLetterMap[pieceId];
 		var squareName = (String.fromCharCode('a'.charCodeAt(0) + squareId % 8)) + (parseInt(squareId / 8, 10) + 1);
+		console.log(squareId, pieceId, pieceLetter, squareName);
 		pieces.push(pieceLetter+'@'+squareName);
 
 	}
-	console.log(Chess, Chess.getDefaultLineup(), gameStatus, pieces);
-	return Chess.getDefaultLineup();
+	//console.log(Chess, Chess.getDefaultLineup(), gameStatus, pieces);
+	return pieces;
 }
 
 class Status extends BaseComponent {
@@ -45,17 +46,19 @@ class Status extends BaseComponent {
 		};
 
 		//this.setGameStatus = this.setGameStatus.bind(this);
-		this.onMovePiece = this.onMovePiece.bind(this)
+		//this.onMovePiece = this.onMovePiece.bind(this)
 	}
 
-	setGameStatus(gameStatus) {
+	setGameStatus(newGameStatus) {
+		var newPieces = getPieces(newGameStatus);
+
 		this.setState({
 			statusText: '',
-			gameStatus: gameStatus,
-			pieces: getPieces(gameStatus)
+			gameStatus: newGameStatus,
+			pieces: newPieces
 		});
 
-		console.log("new state", this, this.state);
+		//console.log("new state", newGameStatus, this, this.state, newPieces);
 	}
 
 	componentDidMount() {
@@ -67,6 +70,9 @@ class Status extends BaseComponent {
 	}
 
 	onMovePiece(piece, fromSquare, toSquare) {
+		if (fromSquare === undefined) {
+			fromSquare = piece.position;
+		}
 		console.log("onMovePiece", piece, fromSquare, toSquare);
 		this.api('move', {method: "POST"}, {'move': fromSquare+toSquare}, data => this.setGameStatus(data.GameStatus));
 	}
@@ -74,7 +80,7 @@ class Status extends BaseComponent {
 	render() {
 		return (
 			<div className='chessBoardContainer'>
-				<Chess pieces={this.state.pieces} onMovePiece={this.onMovePiece} />
+				<Chess pieces={this.state.pieces} onMovePiece={this.onMovePiece.bind(this)} />
 				<ButtonToolbar>
 					<Button onClick={this.onNewGame.bind(this)}>new game</Button>
 				</ButtonToolbar>
