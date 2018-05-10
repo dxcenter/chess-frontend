@@ -1,0 +1,5 @@
+.chessBoardContainer {
+	width: 400px;
+	display: inline-block;
+	position: fixed;
+}
