@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 
 export function loginUserSuccess(token) {
   let decoded = jwtDecode(token);
-  console.log("loginUserSuccess", decoded);
+  console.log("loginUserSuccess: decoded ==", decoded);
   localStorage.setItem('token', token);
   return {
     type: constants.LOGIN_USER_SUCCESS,
@@ -17,6 +17,7 @@ export function loginUserSuccess(token) {
 }
 
 export function loginUserFailure(error) {
+  console.log("loginUserFailure", error);
   localStorage.removeItem('token');
   return {
     type: constants.LOGIN_USER_FAILURE,
@@ -28,12 +29,14 @@ export function loginUserFailure(error) {
 }
 
 export function loginUserRequest() {
+  console.log("loginUserRequest");
   return {
     type: constants.LOGIN_USER_REQUEST
   }
 }
 
 export function logout() {
+  console.log("logout");
     localStorage.removeItem('token');
     return {
         type: constants.LOGOUT_USER
@@ -41,6 +44,7 @@ export function logout() {
 }
 
 export function logoutAndRedirect() {
+  console.log("logoutAndRedirect");
     return (dispatch, state) => {
         dispatch(logout());
         //dispatch(pushState(null, '/login'));
@@ -63,8 +67,10 @@ export function loginUser(login, password, redirect="/") {
             .then(parseJSON)
             .then(response => {
                 try {
-                    dispatch(loginUserSuccess(response.result.token));
+                    console.log("loginUser: success");
+                    dispatch(loginUserSuccess(response.token));
                 } catch (e) {
+                    console.log("loginUser: got an exception:", e);
                     dispatch(loginUserFailure({
                         response: {
                             status: 403,
