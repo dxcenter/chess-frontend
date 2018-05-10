@@ -1,0 +1,47 @@
+
+.Page-logo {
+	position: fixed;
+	right: 90px;
+	bottom: 20px;
+	animation: Page-logo-spin infinite 30s linear;
+	opacity: 0.2;
+}
+
+.Page .contentTitle {
+	padding: 0 20px;
+}
+
+.Page .contentTitle h1 {
+	font-family: "Open Sans", sans-serif;
+	font-weight: 600;
+}
+
+.Page .contentTitle p {
+	color: #999;
+}
+
+.navbar-brand a {
+	margin: 0 8px;
+}
+
+.active {
+	border-bottom: 1px dotted #888;
+}
+.navbar-right {
+	margin: 0;
+}
+.navbar-right button {
+	border: 0;
+	background: transparent;
+	color: #337ab7;
+}
+.navbar-right button:hover {
+	color: #23527c;
+	text-decoration: underline;
+}
+
+@keyframes Page-logo-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
