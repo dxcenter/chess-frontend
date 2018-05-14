@@ -43,6 +43,7 @@ class Status extends BaseComponent {
 			statusText: "",
 			gameStatus: {},
 			pieces: [],
+			actionId: 0,
 		};
 
 		//this.setGameStatus = this.setGameStatus.bind(this);
@@ -52,13 +53,20 @@ class Status extends BaseComponent {
 	setGameStatus(newGameStatus) {
 		var newPieces = getPieces(newGameStatus);
 
+		var newStatusText = '';
+
+		if (newGameStatus.MoveError != null) {
+			newStatusText = newGameStatus.MoveError;
+		}
+
 		this.setState({
-			statusText: '',
+			statusText: newStatusText,
 			gameStatus: newGameStatus,
-			pieces: newPieces
+			pieces: newPieces,
+			actionId: this.state.actionId+1,
 		});
 
-		//console.log("new state", newGameStatus, this, this.state, newPieces);
+		console.log("new state", newGameStatus, this, this.state, newPieces);
 	}
 
 	componentDidMount() {
@@ -81,6 +89,7 @@ class Status extends BaseComponent {
 		return (
 			<div className='chessBoardContainer'>
 				<Chess pieces={this.state.pieces} onMovePiece={this.onMovePiece.bind(this)} />
+				<span>{this.state.statusText}</span>
 				<ButtonToolbar>
 					<Button onClick={this.onNewGame.bind(this)}>new game</Button>
 				</ButtonToolbar>

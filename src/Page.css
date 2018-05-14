@@ -5,6 +5,7 @@
 	bottom: 20px;
 	/*animation: Page-logo-spin infinite 30s linear;*/
 	opacity: 0.2;
+	z-index: -32;
 }
 
 .Page .contentTitle {
