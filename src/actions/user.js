@@ -17,7 +17,7 @@ export function tryToken(token, initiator) {
 
 export function loginUserSuccess(token) {
   let decoded = jwtDecode(token);
-  console.log("loginUserSuccess: decoded ==", decoded);
+  //console.log("loginUserSuccess: decoded ==", decoded);
   localStorage.setItem('token', token);
   return {
     type: constants.LOGIN_USER_SUCCESS,
