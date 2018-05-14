@@ -1,7 +1,19 @@
-import { checkHttpStatus, parseJSON } from '../utils';
+import { checkHttpStatus } from '../utils';
 import constants from '../constants';
 //import { pushState } from 'redux-router';
 import jwtDecode from 'jwt-decode';
+import { api } from './api.js';
+
+export function tryToken(token, initiator) {
+  console.log("tryToken");
+  api('whoami', {}, {}, token)
+    .then(function(){
+      initiator.onAuthed(token);
+    });
+  return {
+    type: constants.LOGIN_USER_REQUEST
+  }
+}
 
 export function loginUserSuccess(token) {
   let decoded = jwtDecode(token);
@@ -54,17 +66,8 @@ export function logoutAndRedirect() {
 export function loginUser(login, password, redirect="/") {
     return function(dispatch) {
         dispatch(loginUserRequest());
-        return fetch('/auth.json', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-                body: JSON.stringify({username: login, password: password})
-            })
+        return api('auth', {method: 'post'}, {username: login, password: password})
             .then(checkHttpStatus)
-            .then(parseJSON)
             .then(response => {
                 try {
                     console.log("loginUser: success");

@@ -70,11 +70,11 @@ class Status extends BaseComponent {
 	}
 
 	componentDidMount() {
-		this.api('game_status', {}, {}, data => this.setGameStatus(data.GameStatus));
+		this.api('game_status').then(data => this.setGameStatus(data.GameStatus));
 	}
 
 	onNewGame() {
-		this.api('new_game', {method: "POST"}, {}, data => this.setGameStatus(data.GameStatus));
+		this.api('new_game', {method: "POST"}).then(data => this.setGameStatus(data.GameStatus));
 	}
 
 	onMovePiece(piece, fromSquare, toSquare) {
@@ -82,7 +82,7 @@ class Status extends BaseComponent {
 			fromSquare = piece.position;
 		}
 		console.log("onMovePiece", piece, fromSquare, toSquare);
-		this.api('move', {method: "POST"}, {'move': fromSquare+toSquare}, data => this.setGameStatus(data.GameStatus));
+		this.api('move', {method: "POST"}, {'move': fromSquare+toSquare}).then(data => this.setGameStatus(data.GameStatus));
 	}
 
 	render() {

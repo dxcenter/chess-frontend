@@ -8,6 +8,7 @@ const initialState = {
 export default function userUpdate(state = initialState, { type, payload }) {
 	switch (type) {
 		case constants.USER_LOGGING_IN:
+		case constants.LOGIN_USER_REQUEST:
 			return { ...initialState, isLoading: true }
 		case constants.LOGIN_USER_SUCCESS:
 			return { data: payload, isLoading: false }
