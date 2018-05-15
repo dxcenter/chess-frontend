@@ -1,0 +1,7 @@
+.Popup {
+	position: fixed;
+	bottom: 0;
+	font-size: 24px;
+	background-color: red;
+	color: white;
+}

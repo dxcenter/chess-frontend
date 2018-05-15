@@ -34,8 +34,9 @@ export function loginUserFailure(error) {
   return {
     type: constants.LOGIN_USER_FAILURE,
     payload: {
-      status: error.response.status,
-      statusText: error.response.statusText
+      status:     error.response.status,
+      statusText: error.response.statusText,
+      message:    error.response.message
     }
   }
 }
@@ -83,47 +84,9 @@ export function loginUser(login, password, redirect="/") {
                 }
             })
             .catch(error => {
+                console.log("loginUser: got an exception (case 2):", error);
                 dispatch(loginUserFailure(error));
             })
     }
 }
-/*
-export function receiveProtectedData(data) {
-    return {
-        type: constants.RECEIVE_PROTECTED_DATA,
-        payload: {
-            data: data
-        }
-    }
-}
 
-export function fetchProtectedDataRequest() {
-  return {
-    type: constants.FETCH_PROTECTED_DATA_REQUEST
-  }
-}
-
-export function fetchProtectedData(token) {
-
-    return (dispatch, state) => {
-        dispatch(fetchProtectedDataRequest());
-        return fetch('/getData/', {
-                credentials: 'include',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(checkHttpStatus)
-            .then(parseJSON)
-            .then(response => {
-                dispatch(receiveProtectedData(response.data));
-            })
-            .catch(error => {
-                if(error.response.status === 401) {
-                  dispatch(loginUserFailure(error));
-                  //dispatch(pushState(null, '/login'));
-                }
-            })
-       }
-}
-*/

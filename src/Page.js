@@ -11,6 +11,8 @@ import { tryToken, loginUserSuccess } from './actions/user'
 
 import { userIsAuthenticated } from './auth'
 
+import Popup from "./views/Popup";
+
 
 const BoardLink = userIsAuthenticated(() => <NavLink exact to="/">Board</NavLink>)
 /*const VLANsLink = userIsAuthenticated(() => <NavLink exact to="/vlans">VLANs</NavLink>)
@@ -22,7 +24,7 @@ class Page extends Component {
 		this.state = {
 			history: createHistory(),
 		};
-		this.tryToken();
+		//this.tryToken();
 	}
 
 	tryToken() {
@@ -34,7 +36,7 @@ class Page extends Component {
 
 	onAuthed(token) {
 		this.state.history.push("/");
-		console.log(this.state, this.props);
+		//console.log(this.state, this.props);
 		this.props.loginUserSuccess(token);
 	}
 
@@ -52,6 +54,7 @@ class Page extends Component {
 							<Navbar.Toggle />
 						</Navbar.Header>
 					</Navbar>
+					<Popup message={this.props.user.message}/>
 					<Routes />
 					<ButtonToolbar>
 					</ButtonToolbar>
@@ -63,7 +66,7 @@ class Page extends Component {
 }
 
 const mapStateToProps = state => ({
-	user: state.user
+	user:    state.user,
 })
 
 export default connect(mapStateToProps, { tryToken, loginUserSuccess })(Page);

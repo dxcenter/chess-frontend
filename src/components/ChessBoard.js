@@ -35,7 +35,7 @@ function getPieces(gameStatus) {
 	return pieces;
 }
 
-class Status extends BaseComponent {
+class Board extends BaseComponent {
 	constructor(props) {
 		super(props);
 
@@ -98,4 +98,4 @@ class Status extends BaseComponent {
 	}
 }
 
-export default connect(state => (state))(Status)
+export default connect(state => (state))(Board)
