@@ -4,9 +4,10 @@ import ChessBoard from "../components/ChessBoard";
 
 export default class BoardView extends Component {
 	render() {
+		//console.log(this.params, this.state, this.props);
 		return (
 			<div className="Board">
-				<ChessBoard />
+				<ChessBoard gameId={this.props.match.params.game_id} />
 			</div>
 		);
 	}

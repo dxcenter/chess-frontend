@@ -1,11 +1,6 @@
 
 .Page-logo {
-	position: fixed;
-	right: 90px;
-	bottom: 20px;
-	/*animation: Page-logo-spin infinite 30s linear;*/
-	opacity: 0.2;
-	z-index: -32;
+	display: none;
 }
 
 .Page .contentTitle {
@@ -46,3 +41,18 @@
 	to { transform: rotate(360deg); }
 }
 
+:invalid {
+	border-color: red;
+}
+
+@media all and (min-width: 900px) and (min-height: 700px) {
+	.Page-logo {
+		display: block; 
+		position: fixed;
+		right: 90px;
+		bottom: 20px;
+		/*animation: Page-logo-spin infinite 30s linear;*/
+		opacity: 0.2;
+		z-index: -32;
+	}
+}

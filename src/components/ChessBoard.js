@@ -70,7 +70,8 @@ class Board extends BaseComponent {
 	}
 
 	componentDidMount() {
-		this.api('game_status').then(data => this.setGameStatus(data.GameStatus));
+		console.log(this.state, this.props);
+		this.api('games/'+encodeURIComponent(this.props.gameId)+'/status').then(data => this.setGameStatus(data.GameStatus));
 	}
 
 	onNewGame() {

@@ -7,14 +7,16 @@ import { Router, NavLink } from 'react-router-dom'
 import { createBrowserHistory as createHistory } from "history";
 import Routes from "./Routes";
 import { connect } from 'react-redux'
-import { tryToken, loginUserSuccess } from './actions/user'
+import { tryToken, loginUserSuccess, loginUserFailure } from './actions/user'
 
 import { userIsAuthenticated } from './auth'
 
 import Popup from "./views/Popup";
 
+import "../node_modules/react-select-search/style.css"
 
-const BoardLink = userIsAuthenticated(() => <NavLink exact to="/">Board</NavLink>)
+
+const NewGameLink = userIsAuthenticated(() => <NavLink exact to="/games/new">New game</NavLink>)
 /*const VLANsLink = userIsAuthenticated(() => <NavLink exact to="/vlans">VLANs</NavLink>)
 const DNATsLink = userIsAuthenticated(() => <NavLink exact to="/dnats">DNATs</NavLink>)
 */
@@ -24,7 +26,7 @@ class Page extends Component {
 		this.state = {
 			history: createHistory(),
 		};
-		//this.tryToken();
+		this.tryToken();
 	}
 
 	tryToken() {
@@ -35,9 +37,13 @@ class Page extends Component {
 	}
 
 	onAuthed(token) {
-		this.state.history.push("/");
+		//this.state.history.push("/");
 		//console.log(this.state, this.props);
 		this.props.loginUserSuccess(token);
+	}
+
+	onAuthFailed(error) {
+		this.props.loginUserFailure(error)
 	}
 
 	render() {
@@ -48,7 +54,7 @@ class Page extends Component {
 						<Navbar.Header>
 							<Navbar.Collapse>
 								<Navbar.Brand>
-									<BoardLink />
+									<NewGameLink />
 								</Navbar.Brand>
 							</Navbar.Collapse>
 							<Navbar.Toggle />
@@ -66,7 +72,7 @@ class Page extends Component {
 }
 
 const mapStateToProps = state => ({
-	user:    state.user,
+	user: state.user,
 })
 
-export default connect(mapStateToProps, { tryToken, loginUserSuccess })(Page);
+export default connect(mapStateToProps, { tryToken, loginUserSuccess, loginUserFailure })(Page);
