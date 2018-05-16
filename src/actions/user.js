@@ -37,6 +37,9 @@ export function loginUserSuccess(token) {
 export function loginUserFailure(error) {
 	console.log("loginUserFailure", error);
 	localStorage.removeItem('token');
+	if (error == null) {
+		error = {};
+	}
 	if (error.response == null) {
 		error.response = {};
 	}

@@ -16,6 +16,7 @@ import Popup from "./views/Popup";
 import "../node_modules/react-select-search/style.css"
 
 
+const GamesLink = userIsAuthenticated(() => <NavLink exact to="/">Games</NavLink>)
 const NewGameLink = userIsAuthenticated(() => <NavLink exact to="/games/new">New game</NavLink>)
 /*const VLANsLink = userIsAuthenticated(() => <NavLink exact to="/vlans">VLANs</NavLink>)
 const DNATsLink = userIsAuthenticated(() => <NavLink exact to="/dnats">DNATs</NavLink>)
@@ -54,6 +55,7 @@ class Page extends Component {
 						<Navbar.Header>
 							<Navbar.Collapse>
 								<Navbar.Brand>
+									<GamesLink />
 									<NewGameLink />
 								</Navbar.Brand>
 							</Navbar.Collapse>

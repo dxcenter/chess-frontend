@@ -1,0 +1,22 @@
+@media all and (min-width: 480px) {
+}
+.gamesContainer {
+}
+.gamesContainer .chessBoardContainer {
+	border: 1px dotted grey;
+	width: 180px;
+	height: 142px;
+	background: white;
+	padding: 4px;
+}
+.gamesContainer .chessBoard {
+	width: 100px;
+}
+.gamesContainer ul {
+	list-style-type: none;
+}
+.gamesContainer li {
+	width: 200px;
+	height: 150px;
+	float: left;
+}

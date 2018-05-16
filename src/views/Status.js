@@ -72,6 +72,7 @@ class StatusView extends BaseComponent {
 			if (isMyPairId[gameRaw.PlayersPairId] != true) {
 				continue;
 			}
+			gameRaw.IsMyGame = true;
 			myGames.push(gameRaw);
 		}
 
@@ -91,10 +92,10 @@ class StatusView extends BaseComponent {
 	}
 
 	render() {
-		console.log(this.state);
+		console.log('status props', this.props, this.state);
 		return (
 			<div className="Games">
-				<Games games={this.state.games.my} />
+				<Games me={this.state.whoami} history={this.props.history} games={this.state.games.my} />
 			</div>
 		);
 	}
